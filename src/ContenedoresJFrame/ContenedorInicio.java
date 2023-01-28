@@ -30,7 +30,7 @@ public class ContenedorInicio extends JFrame{
         this.setTitle("Hotel Bay's");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        this.setResizable(true);
+        this.setResizable(false);
 //        //icono
 //        ImageIcon icon = new ImageIcon("./src/main/java/source/convertirblack.png");
 //        this.setIconImage(icon.getImage());
