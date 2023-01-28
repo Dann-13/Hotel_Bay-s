@@ -5,8 +5,15 @@
 package VistasJPanel.VistaInicio;
 
 import ContenedoresJFrame.ContenedorInicio;
+import ContenedoresJFrame.ContenedorLogin;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -24,13 +31,14 @@ public class JPanelContenedor extends JPanel {
     JPanel jPanelIzquierdo;
 
     //Objetos
-    JLabel labelImg, LblImgLoguin, LblPie;
-    JButton btnMonedas, btnTemperatura;
+    JLabel labelImg, LblPie, lblLogo, lbLloguin;
+    JButton btnlImgLoguin;
 
     public JPanelContenedor(ContenedorInicio inicio) {
         this.inicio = inicio;
         this.inicializador();
         this.inicializadorObjetos();
+        this.inicializadorEventos();
     }
 
     private void inicializador() {
@@ -60,16 +68,51 @@ public class JPanelContenedor extends JPanel {
         jPanelIzquierdo = new JPanel();
         jPanelIzquierdo.setLayout(null);
         jPanelIzquierdo.setBounds(550, 0, 250, 500);
-
+        
+        //Imagen Logo
+        lblLogo = new JLabel();
+        lblLogo.setBounds(20, 30, 200, 200);
+        ImageIcon iconLogo = new ImageIcon("./src/Source/logoHotel.png");
+        iconLogo.setImage(iconLogo.getImage().getScaledInstance(lblLogo.getWidth(), lblLogo.getHeight(), Image.SCALE_DEFAULT));
+        lblLogo.setIcon(iconLogo);
+        jPanelIzquierdo.add(lblLogo);
+        
+        lbLloguin = new JLabel();
+        lbLloguin.setBounds(95, 280, 100, 30);
+        lbLloguin.setText("Login");
+        lbLloguin.setFont(new Font("Arial", Font.PLAIN, 20));
+        lbLloguin.setForeground(new Color(74,106,221));
+        jPanelIzquierdo.add(lbLloguin);
+        
         //Imagen Loguin
-        LblImgLoguin = new JLabel();
-        LblImgLoguin.setBounds(90, 100, 60, 60);
+        btnlImgLoguin = new JButton();
+        btnlImgLoguin.setBounds(90, 320, 60, 60);
+        btnlImgLoguin.setBorderPainted(false);
+        btnlImgLoguin.setContentAreaFilled(false);
         ImageIcon icon2 = new ImageIcon("./src/Source/user.png");
-        icon2.setImage(icon2.getImage().getScaledInstance(LblImgLoguin.getWidth(), LblImgLoguin.getHeight(), Image.SCALE_DEFAULT));
-        LblImgLoguin.setIcon(icon2);
-        jPanelIzquierdo.add(LblImgLoguin);
+        icon2.setImage(icon2.getImage().getScaledInstance(btnlImgLoguin.getWidth(), btnlImgLoguin.getHeight(), Image.SCALE_DEFAULT));
+        btnlImgLoguin.setIcon(icon2);
+        jPanelIzquierdo.add(btnlImgLoguin);
         this.add(jPanelIzquierdo);
         
    
+    }
+
+    private void inicializadorEventos() {
+        ActionListener escuchaBtnLogin = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                escuchaBtnLoginClick();
+            }
+            
+        };
+        btnlImgLoguin.addActionListener(escuchaBtnLogin);
+       
+    
+    }
+    public void escuchaBtnLoginClick(){
+        ContenedorLogin login = new ContenedorLogin();
+        login.setVisible(true);
+        this.inicio.dispose();
     }
 }
