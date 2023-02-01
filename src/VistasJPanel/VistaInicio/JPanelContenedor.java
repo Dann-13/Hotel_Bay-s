@@ -62,7 +62,7 @@ public class JPanelContenedor extends JPanel {
         LblPie.setForeground(Color.white);
         LblPie.setBounds(0, 431, 800, 30);
         LblPie.setOpaque(true);
-        LblPie.setBackground(new Color(99, 92, 252));
+        LblPie.setBackground(new Color(52, 43, 255));
         this.add(LblPie);
 
         jPanelIzquierdo = new JPanel();
@@ -81,7 +81,7 @@ public class JPanelContenedor extends JPanel {
         lbLloguin.setBounds(95, 280, 100, 30);
         lbLloguin.setText("Login");
         lbLloguin.setFont(new Font("Arial", Font.PLAIN, 20));
-        lbLloguin.setForeground(new Color(74,106,221));
+        lbLloguin.setForeground(new Color(52, 43, 255));
         jPanelIzquierdo.add(lbLloguin);
         
         //Imagen Loguin

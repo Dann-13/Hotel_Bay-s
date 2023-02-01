@@ -4,7 +4,9 @@
  */
 package ContenedoresJFrame;
 
-import VistasJPanel.VistaLoguin.jPanelVistaLogin;
+import VistasJPanel.VistaLoguin.jPanelVistaLoginContenedor;
+import java.awt.FontFormatException;
+import java.io.IOException;
 import javax.swing.JFrame;
 
 /**
@@ -12,22 +14,22 @@ import javax.swing.JFrame;
  * @author Daniel
  */
 public class ContenedorLogin extends JFrame {
-    jPanelVistaLogin jpanelVistaLogin;
-    public ContenedorLogin() {
+    jPanelVistaLoginContenedor jpanelVistaLogin;
+    public ContenedorLogin() throws FontFormatException, IOException {
         this.inicializador();
         this.inicializadorObjetos();
     }
 
     private void inicializador() {
-        this.setSize(400, 400);
-        this.setTitle("Loguin");
+        this.setSize(800, 500);
+        this.setTitle("Login");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
 
-    private void inicializadorObjetos() {
-        jpanelVistaLogin = new jPanelVistaLogin();
+    private void inicializadorObjetos() throws FontFormatException, IOException {
+        jpanelVistaLogin = new jPanelVistaLoginContenedor(this);
         this.getContentPane().add(jpanelVistaLogin);
 
     }
