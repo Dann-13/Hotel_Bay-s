@@ -5,11 +5,16 @@
 package VistasJPanel.VistaLoguin;
 
 import ContenedoresJFrame.ContenedorLogin;
+import ContenedoresJFrame.ContenedorMenuUsuario;
+import VistasJPanel.VistaInicio.JPanelContenedor;
+import VistasJPanel.VistaMenuUsuario.JPanelVistaMenuUsuario;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
@@ -19,6 +24,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -53,6 +60,7 @@ public class jPanelVistaLoginContenedor extends JPanel {
         this.login = login;
         this.inicializador();
         this.inicializadorObjetos();
+        inicializadorEventos();
     }
 
     private void inicializador() {
@@ -145,7 +153,7 @@ public class jPanelVistaLoginContenedor extends JPanel {
             }
         });
         this.add(TxtUsuario);
-        
+
         //Label Contraseña
         lblContrasena = new JLabel();
         lblContrasena.setBounds(70, 250, 200, 50);
@@ -176,7 +184,7 @@ public class jPanelVistaLoginContenedor extends JPanel {
             }
         });
         this.add(showPasswordCheckbox);
-        
+
         //BtnIngresar
         btnIngresar = new JButton("INGRESAR");
         btnIngresar.setFont(customFont.deriveFont(23f));
@@ -184,8 +192,25 @@ public class jPanelVistaLoginContenedor extends JPanel {
         btnIngresar.setForeground(Color.white);
         btnIngresar.setBounds(70, 350, 150, 30);
         this.add(btnIngresar);
-        
 
+    }
+
+    private void inicializadorEventos() {
+        ActionListener escuchaBtnIngresar = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                escuchaBtnEntrarClick();
+            }
+
+        };
+        btnIngresar.addActionListener(escuchaBtnIngresar);
+
+    }
+
+    private void escuchaBtnEntrarClick() {
+        ContenedorMenuUsuario menuUseuario = new ContenedorMenuUsuario();
+        menuUseuario.setVisible(true);
+        this.login.dispose();
     }
 
     private static void loadFont() {
