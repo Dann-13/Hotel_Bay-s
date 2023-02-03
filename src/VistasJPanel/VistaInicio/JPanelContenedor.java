@@ -8,6 +8,7 @@ import ContenedoresJFrame.ContenedorInicio;
 import ContenedoresJFrame.ContenedorLogin;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -102,7 +103,13 @@ public class JPanelContenedor extends JPanel {
         ActionListener escuchaBtnLogin = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                escuchaBtnLoginClick();
+                try {
+                    escuchaBtnLoginClick();
+                } catch (FontFormatException ex) {
+                    Logger.getLogger(JPanelContenedor.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(JPanelContenedor.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             
         };
@@ -110,7 +117,7 @@ public class JPanelContenedor extends JPanel {
        
     
     }
-    public void escuchaBtnLoginClick(){
+    public void escuchaBtnLoginClick() throws FontFormatException, IOException{
         ContenedorLogin login = new ContenedorLogin();
         login.setVisible(true);
         this.inicio.dispose();

@@ -10,14 +10,24 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 /**
  * jPanel contenedor de la vista login Estaran 2 jpanel mas
@@ -26,7 +36,12 @@ import javax.swing.JPanel;
  */
 public class jPanelVistaLoginContenedor extends JPanel {
 
-    JLabel LblImgPanelDerecho, lblBienvenido;
+    JLabel LblImgPanelDerecho, lblBienvenido, lblLogin, LblImgLogoIzquierdo, lblUsuario, lblContrasena;
+    JTextField TxtUsuario;
+    JButton btnIngresar;
+    JPasswordField passwordField;
+    JCheckBox showPasswordCheckbox;
+
     private static Font customFont;
 
     long startTime = System.currentTimeMillis();
@@ -42,6 +57,7 @@ public class jPanelVistaLoginContenedor extends JPanel {
 
     private void inicializador() {
         this.setLayout(null);
+        this.setBackground(Color.white);
     }
 
     private void inicializadorObjetos() throws FontFormatException, IOException {
@@ -51,12 +67,6 @@ public class jPanelVistaLoginContenedor extends JPanel {
             long duration = endTime - startTime;
             System.out.println("El tiempo de ejecución de loadFont() fue de " + duration + " milisegundos.");
         }
-
-//        //Cargamos Fuente Personlizada 
-//        Font font = Font.createFont(Font.TRUETYPE_FONT, new File("./src/Source/Font/TypoGraphica.otf"));
-//        // Establecer la fuente personalizada como la fuente predeterminada
-//        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-//        ge.registerFont(font);
         //Panel Derecho
         jPanelDerecho = new JPanel();
         jPanelDerecho.setLayout(null);
@@ -76,11 +86,105 @@ public class jPanelVistaLoginContenedor extends JPanel {
         lblBienvenido.setText("Bienvenido");
         lblBienvenido.setForeground(Color.WHITE);
         //lblBienvenido.setFont(font.deriveFont(Font.PLAIN, 25));
-        lblBienvenido.setFont(customFont.deriveFont(24f));
-        
+        lblBienvenido.setFont(customFont.deriveFont(30f));
+
         jPanelDerecho.add(lblBienvenido);
         //Aqui agrgamos el panel
         this.add(jPanelDerecho);
+
+        //Parte Izquierda
+        //Imagen Logo
+        LblImgLogoIzquierdo = new JLabel();
+        LblImgLogoIzquierdo.setBounds(70, 20, 100, 100);
+        ImageIcon icon2 = new ImageIcon("./src/Source/logoHotel.png");
+        icon2.setImage(icon2.getImage().getScaledInstance(LblImgLogoIzquierdo.getWidth(), LblImgLogoIzquierdo.getHeight(), Image.SCALE_DEFAULT));
+        LblImgLogoIzquierdo.setIcon(icon2);
+        this.add(LblImgLogoIzquierdo);
+
+        //Label Login
+        lblLogin = new JLabel();
+        lblLogin.setBounds(70, 110, 200, 50);
+        lblLogin.setText("LOG IN");
+        lblLogin.setForeground(new Color(52, 43, 255));
+        lblLogin.setFont(customFont.deriveFont(27f));
+        this.add(lblLogin);
+
+        //Label Login
+        lblUsuario = new JLabel();
+        lblUsuario.setBounds(70, 170, 200, 50);
+        lblUsuario.setText("User");
+        lblUsuario.setForeground(new Color(52, 43, 255));
+        lblUsuario.setFont(customFont.deriveFont(23f));
+        this.add(lblUsuario);
+
+        TxtUsuario = new JTextField(" Ingrese  su  Nombre  de  Usuario");
+        TxtUsuario.setFont(customFont.deriveFont(15f));
+        TxtUsuario.setForeground(new Color(85, 74, 97));
+        TxtUsuario.setBounds(70, 220, 300, 30);
+        TxtUsuario.setSelectionStart(0);
+        TxtUsuario.setSelectionEnd(0);
+        TxtUsuario.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        TxtUsuario.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (TxtUsuario.getText().equals("Ingrese su Usuario")) {
+                    TxtUsuario.setCaretPosition(0);
+                    TxtUsuario.setText("");
+                    TxtUsuario.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (TxtUsuario.getText().isEmpty()) {
+                    TxtUsuario.setText("Ingrese su Usuario");
+                    TxtUsuario.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+
+                }
+            }
+        });
+        this.add(TxtUsuario);
+        
+        //Label Contraseña
+        lblContrasena = new JLabel();
+        lblContrasena.setBounds(70, 250, 200, 50);
+        lblContrasena.setText("Password");
+        lblContrasena.setForeground(new Color(52, 43, 255));
+        lblContrasena.setFont(customFont.deriveFont(23f));
+        this.add(lblContrasena);
+
+        passwordField = new JPasswordField();
+        passwordField.setEchoChar('*');
+        passwordField.setBounds(70, 300, 300, 30);
+        passwordField.setBackground(Color.WHITE);
+        passwordField.setForeground(Color.BLACK);
+        passwordField.setFont(new Font("Arial", Font.PLAIN, 18));
+        passwordField.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        this.add(passwordField);
+
+        showPasswordCheckbox = new JCheckBox(" ͡o ");
+        showPasswordCheckbox.setBounds(380, 300, 20, 30);
+        showPasswordCheckbox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    passwordField.setEchoChar((char) 0);
+                } else {
+                    passwordField.setEchoChar('*');
+                }
+            }
+        });
+        this.add(showPasswordCheckbox);
+        
+        //BtnIngresar
+        btnIngresar = new JButton("INGRESAR");
+        btnIngresar.setFont(customFont.deriveFont(23f));
+        btnIngresar.setBackground(new Color(52, 43, 255));
+        btnIngresar.setForeground(Color.white);
+        btnIngresar.setBounds(70, 350, 150, 30);
+        this.add(btnIngresar);
+        
 
     }
 
