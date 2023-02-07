@@ -7,7 +7,6 @@ package VistasJPanel.VistaLoguin;
 import ContenedoresJFrame.ContenedorLogin;
 import ContenedoresJFrame.ContenedorMenuUsuario;
 import VistasJPanel.VistaInicio.JPanelContenedor;
-import VistasJPanel.VistaMenuUsuario.JPanelVistaMenuUsuario;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -90,7 +89,7 @@ public class jPanelVistaLoginContenedor extends JPanel {
         jPanelDerecho.add(LblImgPanelDerecho);
         //Label Bienvenido
         lblBienvenido = new JLabel();
-        lblBienvenido.setBounds(80, 120, 150, 50);
+        lblBienvenido.setBounds(80, 100, 150, 50);
         lblBienvenido.setText("Bienvenido");
         lblBienvenido.setForeground(Color.WHITE);
         //lblBienvenido.setFont(font.deriveFont(Font.PLAIN, 25));
@@ -135,7 +134,7 @@ public class jPanelVistaLoginContenedor extends JPanel {
         TxtUsuario.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (TxtUsuario.getText().equals("Ingrese su Usuario")) {
+                if (TxtUsuario.getText().equals(" Ingrese  su  Nombre  de  Usuario")) {
                     TxtUsuario.setCaretPosition(0);
                     TxtUsuario.setText("");
                     TxtUsuario.setBorder(BorderFactory.createLineBorder(Color.BLUE));
@@ -146,7 +145,7 @@ public class jPanelVistaLoginContenedor extends JPanel {
             @Override
             public void focusLost(FocusEvent e) {
                 if (TxtUsuario.getText().isEmpty()) {
-                    TxtUsuario.setText("Ingrese su Usuario");
+                    TxtUsuario.setText(" Ingrese  su  Nombre  de  Usuario");
                     TxtUsuario.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
                 }
